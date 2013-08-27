@@ -16,6 +16,9 @@
 #ifndef __STR_MULTIREPLACE_H__
 #define __STR_MULTIREPLACE_H__
 
+#include <stdlib.h>
+#include <stdint.h>
+
 /**
  * Out of memory error
  */

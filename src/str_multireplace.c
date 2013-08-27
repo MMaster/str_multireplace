@@ -13,6 +13,7 @@
  * large number of replacements. (don't have exact numbers - not tested yet)
  */
 
+#include <stdio.h>
 #include "str_multireplace.h"
 
 /**
@@ -116,7 +117,7 @@ typedef struct {
  */
 static void
 str_mr_kr_search(const char *str, size_t str_len,
-                 const str_mr_match_pair_wrap *matches, size_t match_cnt)
+                 str_mr_match_pair_wrap *matches, size_t match_cnt)
 {
     uint64_t    str_hash = 0;
     uint64_t    match_hash = 0;
@@ -166,6 +167,10 @@ str_mr_kr_search(const char *str, size_t str_len,
 
     /* walk through the source string and try to find a match */
     while (j < str_len - shortest_match_len) {
+        /* reset stored variables */
+        last_key_len = 0;
+        last_str_hash = 0;
+
         /* walk all matches that can fit into the source string at j */
         for (m = first_valid_m; m < match_cnt; m++) {
             match_len = matches[m].pair->key_length;
@@ -175,20 +180,21 @@ str_mr_kr_search(const char *str, size_t str_len,
                 continue;
             }
 
-            /* if it's the same str_hash as last key */
-            if (matches[m].str_hash == str_hash) {
+            str_hash = matches[m].str_hash;
+            match = matches[m].pair->key;
+            match_hash = matches[m].key_hash;
+
+            /* if it's the same match_len as last key */
+            if (match_len == last_key_len) {
                 /* use the last computed hash */
                 matches[m].str_hash = last_str_hash;
+                /* str_hash stays the same as last time */
             } else {
-                str_hash = matches[m].str_hash;
-
                 /* compute hash of next substring */
                 matches[m].str_hash =
                         REHASH(str[j], str[j + match_len], str_hash,
                                matches[m].rem_coef);
             }
-            match = matches[m].pair->key;
-            match_hash = matches[m].key_hash;
 
             /* 
              * compare hashes and memory (if hashes are equal) 
@@ -207,6 +213,7 @@ str_mr_kr_search(const char *str, size_t str_len,
              * store hash for next match (if it has same length)
              */
             last_str_hash = matches[m].str_hash;
+            last_key_len = match_len;
         }
         j++;
     }
