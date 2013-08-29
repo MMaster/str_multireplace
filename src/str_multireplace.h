@@ -1,4 +1,3 @@
-
 /**
  * @file      str_multireplace.h
  * @brief     Header for multiple key-value replacement in provided string.
@@ -6,10 +5,10 @@
  * @version   0.1
  * @date      2013
  * @copyright Apache License v2
- * 
+ *
  * This is somewhat complex, but quite fast implementation of multiple pattern
  * string replacement.
- * It can consume some additional memory while processing large strings with 
+ * It can consume some additional memory while processing large strings with
  * large number of replacements. (don't have exact numbers - not tested yet)
  */
 
@@ -25,7 +24,7 @@
 #define STR_MR_ERROR_OOM            (-1)
 
 /**
- * Invalid argument provided error 
+ * Invalid argument provided error
  * (usually means something was NULL where it shouldn't be)
  */
 #define STR_MR_ERROR_INVALID_ARG    (-2)
@@ -41,9 +40,9 @@
  */
 typedef struct {
     const char *key;            /**< key that should be replaced */
-    size_t      key_length;     /**< length of the key (w/o NULL termin.) */
+    size_t key_length;          /**< length of the key (w/o NULL termin.) */
     const char *value;          /**< value put in place of key */
-    size_t      value_length;   /**< length of the value (w/o NULL termin.) */
+    size_t value_length;        /**< length of the value (w/o NULL termin.) */
 } str_mr_match_pair;
 
 /**
@@ -59,7 +58,7 @@ typedef struct {
  * @param[in] str_len source string length (without NULL terminator)
  * @param[in] match_pairs match pairs array
  * @param[in] match_pair_cnt number of match pairs in match_pair array
- * @param[out] result newly allocated NULL terminated string containing all 
+ * @param[out] result newly allocated NULL terminated string containing all
  *             replacements
  * @param[out] result_len length of result string
  *
