@@ -19,8 +19,8 @@ int
 main ()
 {
     str_mr_match_pair mps[] = {
-        {"1",  1, "one", 3},        {"2",     1, "two",  3},
-        {"33", 2, "threethree", 6}, {"abcde", 5, "a..e", 4},
+        {"1",  1, "One", 3},         {"2",     1, "Two",  3},
+        {"33", 2, "Threethree", 10}, {"abcde", 5, "A..e", 4},
     };
     size_t mp_cnt = sizeof(mps) / sizeof(str_mr_match_pair);
     const char *str   = "1233abcde2331122233333abcdeabcdeaaabcdefg";
