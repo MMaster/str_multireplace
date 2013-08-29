@@ -17,6 +17,12 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
+
+/**
+ * Success
+ */
+#define STR_MR_ERROR_SUCCESS        (0)
 
 /**
  * Out of memory error
@@ -46,21 +52,21 @@ typedef struct {
 } str_mr_match_pair;
 
 /**
- * @brief Function to replace all occurrences of match pairs in string str.
+ * @brief Function to replace all occurrences of match pairs in buffer.
  *
  * Replaces all occurrences of key from provided match_pairs array with the
- * value associated with that key in specified string.
+ * value associated with that key in specified buffer.
  * Doesn't care about NULL terminators so you can use it on any buffer.
  *
  * Note: Caller is responsible for freeing the result.
  *
- * @param[in] str source string
- * @param[in] str_len source string length (without NULL terminator)
+ * @param[in] str source buffer
+ * @param[in] str_len source buffer length
  * @param[in] match_pairs match pairs array
  * @param[in] match_pair_cnt number of match pairs in match_pair array
- * @param[out] result newly allocated NULL terminated string containing all
- *             replacements
+ * @param[out] result newly allocated buffer containing all replacements
  * @param[out] result_len length of result string
+ * @param[in] terminate true to get the result to be terminated
  *
  * @return number of replacements made or negative number on error
  * @retval STR_MR_ERROR_OOM out of memory
@@ -70,6 +76,6 @@ typedef struct {
 int32_t
 str_multireplace(const char *str, size_t str_len,
                  const str_mr_match_pair *match_pairs, size_t match_pair_cnt,
-                 char **result, size_t *result_len);
+                 char **result, size_t *result_len, bool terminate);
 
 #endif
