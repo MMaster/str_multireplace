@@ -1,7 +1,7 @@
 /**
  * @file      str_multireplace.h
  * @brief     Header for multiple key-value replacement in provided string.
- * @author    Matej Spanik
+ * @author    MMaster
  * @version   0.1
  * @date      2013
  * @copyright Apache License v2
