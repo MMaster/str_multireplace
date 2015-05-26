@@ -1,7 +1,7 @@
 /**
  * @file      str_multireplace.c
  * @brief     Multiple key-value replacement in provided string.
- * @author    Matej Spanik <mmaster@bitbix.com>
+ * @author    MMaster <mmaster@bitbix.com>
  * @version   0.1
  * @date      2013
  * @copyright Apache License v2
